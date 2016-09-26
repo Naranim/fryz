@@ -58,4 +58,7 @@ angular
       .otherwise({
         redirectTo: '/'
       });
+  })
+  .run(function($httpBackend) {
+     $httpBackend.whenGET(/^views\//).passThrough();
   });
