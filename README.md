@@ -3,6 +3,13 @@
 This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
 version 0.15.1.
 
+## First run
+
+Run `npm install`
+Run `npm install -g bower`
+Run `bower install `
+Run `gem install compass`
+
 ## Build & development
 
 Run `grunt` for building and `grunt serve` for preview.
