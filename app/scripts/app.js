@@ -27,6 +27,11 @@ app.config(function($routeProvider) {
       controller: 'MainCtrl',
       controllerAs: 'main'
     })
+    .when('/book', {
+      templateUrl: 'views/book.html',
+      controller: 'BookCtrl',
+      controllerAs: 'book'
+    })
     .when('/about', {
       templateUrl: 'views/about.html',
       controller: 'AboutCtrl',
