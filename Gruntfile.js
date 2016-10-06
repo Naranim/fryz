@@ -16,7 +16,8 @@ module.exports = function (grunt) {
   require('jit-grunt')(grunt, {
     useminPrepare: 'grunt-usemin',
     ngtemplates: 'grunt-angular-templates',
-    cdnify: 'grunt-google-cdn'
+    cdnify: 'grunt-google-cdn',
+    commands: 'grunt-commands'
   });
 
   // Configurable paths for the application
@@ -43,6 +44,10 @@ module.exports = function (grunt) {
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
+      },
+      bookingjs: {
+        files: ['booking-js/src/{,*/}*.{scss,css,svg,html,js}'],
+        tasks: ['bookingjs']
       },
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
@@ -450,6 +455,12 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+
+    commands: {
+      bookingjs: {
+        cmd: 'cd booking-js && npm run-script compile && cp dist/booking.js ../bower_components/'
+      }
     }
   });
 
@@ -461,6 +472,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      'bookingjs',
       'wiredep',
       'concurrent:server',
       'postcss:server',
@@ -485,6 +497,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'bookingjs',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
@@ -499,6 +512,10 @@ module.exports = function (grunt) {
     'filerev',
     'usemin',
     'htmlmin'
+  ]);
+
+  grunt.registerTask('bookingjs', [
+    'commands:bookingjs'
   ]);
 
   grunt.registerTask('default', [
